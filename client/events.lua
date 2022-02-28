@@ -71,6 +71,25 @@ RegisterNetEvent('qb-admin:client:SaveCar', function()
     end
 end)
 
+RegisterNetEvent('qb-admin:client:SaveCarModelName', function(name)
+    local ped = PlayerPedId()
+    local veh = GetVehiclePedIsIn(ped)
+
+    if veh ~= nil and veh ~= 0 then
+        local plate = QBCore.Functions.GetPlate(veh)
+        local props = QBCore.Functions.GetVehicleProperties(veh)
+        local hash = props.model
+        local vehname = GetDisplayNameFromVehicleModel(hash):lower()
+        if QBCore.Shared.Vehicles[name] ~= nil and next(QBCore.Shared.Vehicles[name]) ~= nil then
+            TriggerServerEvent('qb-admin:server:SaveCar', props, QBCore.Shared.Vehicles[name], GetHashKey(name), plate)
+        else
+            QBCore.Functions.Notify('You cant store this vehicle in your garage..', 'error')
+        end
+    else
+        QBCore.Functions.Notify('You are not in a vehicle..', 'error')
+    end
+end)
+
 local function LoadPlayerModel(skin)
     RequestModel(skin)
     while not HasModelLoaded(skin) do

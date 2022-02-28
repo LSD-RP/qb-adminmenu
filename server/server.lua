@@ -204,7 +204,7 @@ end)
 
 RegisterNetEvent('qb-admin:server:SendReport', function(name, targetSrc, msg)
     local src = source
-    if QBCore.Functions.HasPermission(src, 'admin') or IsPlayerAceAllowed(src, 'command') then
+    if QBCore.Functions.HasPermission(src, 'admin') or QBCore.Functions.HasPermission(src, 'staff') or IsPlayerAceAllowed(src, 'command') then
         if QBCore.Functions.IsOptin(src) then
             TriggerClientEvent('chat:addMessage', src, {
                 color = {255, 0, 0},
@@ -217,7 +217,7 @@ end)
 
 RegisterNetEvent('qb-admin:server:Staffchat:addMessage', function(name, msg)
     local src = source
-    if QBCore.Functions.HasPermission(src, 'admin') or IsPlayerAceAllowed(src, 'command') then
+    if QBCore.Functions.HasPermission(src, 'admin') or QBCore.Functions.HasPermission(src, 'staff') or IsPlayerAceAllowed(src, 'command') then
         if QBCore.Functions.IsOptin(src) then
             TriggerClientEvent('chat:addMessage', src, 'STAFFCHAT - '..name, 'error', msg)
         end
@@ -271,6 +271,11 @@ QBCore.Commands.Add('admincar', 'Save Vehicle To Your Garage (Admin Only)', {}, 
     TriggerClientEvent('qb-admin:client:SaveCar', source)
 end, 'admin')
 
+QBCore.Commands.Add('admincarname', 'Save Vehicle To Your Garage (Admin Only)', {}, false, function(source, args)
+    local ply = QBCore.Functions.GetPlayer(source)
+    TriggerClientEvent('qb-admin:client:SaveCarModelName', source, args[1])
+end, 'admin')
+
 QBCore.Commands.Add('announce', 'Make An Announcement (Admin Only)', {}, false, function(source, args)
     local msg = table.concat(args, ' ')
     if msg == '' then return end
@@ -296,7 +301,7 @@ end)
 QBCore.Commands.Add('staffchat', 'Send A Message To All Staff (Admin Only)', {{name='message', help='Message'}}, true, function(source, args)
     local msg = table.concat(args, ' ')
     TriggerClientEvent('qb-admin:client:SendStaffChat', -1, GetPlayerName(source), msg)
-end, 'admin')
+end, 'staff')
 
 QBCore.Commands.Add('givenuifocus', 'Give A Player NUI Focus (Admin Only)', {{name='id', help='Player id'}, {name='focus', help='Set focus on/off'}, {name='mouse', help='Set mouse on/off'}}, true, function(source, args)
     local playerid = tonumber(args[1])
@@ -376,7 +381,7 @@ QBCore.Commands.Add('reportr', 'Reply To A Report (Admin Only)', {{name='id', he
     })
     TriggerClientEvent('QBCore:Notify', src, 'Reply Sent')
     TriggerEvent('qb-log:server:CreateLog', 'report', 'Report Reply', 'red', '**'..GetPlayerName(src)..'** replied on: **'..OtherPlayer.PlayerData.name.. ' **(ID: '..OtherPlayer.PlayerData.source..') **Message:** ' ..msg, false)
-end, 'admin')
+end, 'staff')
 
 QBCore.Commands.Add('setmodel', 'Change Ped Model (Admin Only)', {{name='model', help='Name of the model'}, {name='id', help='Id of the Player (empty for yourself)'}}, false, function(source, args)
     local model = args[1]
@@ -414,7 +419,7 @@ QBCore.Commands.Add('reporttoggle', 'Toggle Incoming Reports (Admin Only)', {}, 
     else
         TriggerClientEvent('QBCore:Notify', src, 'You are not receiving reports', 'error')
     end
-end, 'admin')
+end, 'staff')
 
 QBCore.Commands.Add('kickall', 'Kick all players', {}, false, function(source, args)
     local src = source
