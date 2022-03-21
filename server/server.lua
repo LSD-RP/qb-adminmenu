@@ -244,6 +244,10 @@ RegisterNetEvent('qb-admin:server:SaveCar', function(mods, vehicle, hash, plate)
     end
 end)
 
+RegisterNetEvent('qb-admin:server:deleteLazerGlobal', function(model, coords)
+    TriggerClientEvent('qb-admin:client:deleteLazerGlobal', -1, model, coords)
+end)
+
 -- Commands
 
 QBCore.Commands.Add('blips', Lang:t("commands.blips_for_player"), {}, false, function(source)

@@ -1153,6 +1153,8 @@ CreateThread(function()	-- While loop needed for delete lazer
 			Draw2DText(Lang:t("info.delete_object_info"), 4, {255, 255, 255}, 0.4, 0.55, 0.888 + 0.025)
 			-- When E pressed then remove targeted entity
 			if IsControlJustReleased(0, 38) then
+                local model = GetEntityModel(entity)
+                -- TriggerServerEvent('qb-admin:server:deleteLazerGlobal', model, entityCoord)
 			    -- Set as missionEntity so the object can be remove (Even map objects)
 			    SetEntityAsMissionEntity(entity, true, true)
 			    --SetEntityAsNoLongerNeeded(entity)
@@ -1168,4 +1170,18 @@ CreateThread(function()	-- While loop needed for delete lazer
 		end
 		Wait(sleep)
 	end
+end)
+
+RegisterNetEvent('qb-admin:client:deleteLazerGlobal')
+AddEventHandler('qb-admin:client:deleteLazerGlobal', function(model, coords)
+    print(model)
+    print(coords)
+    local ent = GetClosestObjectOfType(coords.x, coords.y, coords.z, 1.0, GetHashKey(model), 0, 0, 0)
+    if ent then
+        print("true")
+        SetEntityAsMissionEntity(ent, true, true)
+        SetEntityAsNoLongerNeeded(ent)
+        RequestNetworkControl(ent)
+        DeleteEntity(ent)
+    end
 end)
