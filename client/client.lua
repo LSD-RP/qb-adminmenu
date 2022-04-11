@@ -391,11 +391,15 @@ menu_dev_button:On('change', function(item, newValue, oldValue)
     dev = not dev
     TriggerEvent('qb-admin:client:ToggleDevmode')
     if dev then
+        TriggerEvent('qb-weathersync:client:DisableSync')
+        ToggleShowCoordinates()
         while dev do
             Wait(200)
             SetPlayerInvincible(PlayerId(), true)
         end
-            SetPlayerInvincible(PlayerId(), false)
+        ToggleShowCoordinates()
+        TriggerEvent('qb-weathersync:client:EnableSync')
+        SetPlayerInvincible(PlayerId(), false)
     end
 end)
 
@@ -453,7 +457,7 @@ local function Draw2DText(content, font, colour, scale, x, y)
     DrawText(x, y)
 end
 
-local function ToggleShowCoordinates()
+function ToggleShowCoordinates()
     local x = 0.4
     local y = 0.025
     showCoords = not showCoords
