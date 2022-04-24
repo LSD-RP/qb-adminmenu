@@ -521,7 +521,7 @@ vehicledev_button:On('select', function()
 end)
 
 noclip_button:On('change', function(item, newValue, oldValue)
-    ToggleNoClipMode()
+    ToggleNoClip()
 end)
 
 togglecoords_button:On('change', function()
@@ -979,7 +979,7 @@ end)
 -- Toggle NoClip
 
 menu_button5:On('change', function(item, newValue, oldValue)
-    ToggleNoClipMode()
+    ToggleNoClip()
 end)
 
 -- Revive Self
