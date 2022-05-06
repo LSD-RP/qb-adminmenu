@@ -18,6 +18,8 @@ local menu11 = MenuV:CreateMenu(false, Lang:t("menu.developer_options"), menuLoc
 local menu12 = MenuV:CreateMenu(false, Lang:t("menu.vehicle_options"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test11')
 local menu13 = MenuV:CreateMenu(false, Lang:t("menu.vehicle_categories"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test12')
 local menu14 = MenuV:CreateMenu(false, Lang:t("menu.vehicle_models"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test13')
+local menu15 = MenuV:CreateMenu(false, Lang:t("menu.entity_view_options"), menuLocation, 220, 20, 60, 'size-125', 'none', 'menuv', 'test15')
+
 
 RegisterNetEvent('qb-admin:client:openMenu', function()
     MenuV:OpenMenu(menu)
@@ -56,7 +58,7 @@ local menu_button4 = menu:AddButton({
 local menu_button5 = menu2:AddCheckbox({
     icon = '🎥',
     label = Lang:t("menu.noclip"),
-    value = menu2,
+    value = nil,
     description = Lang:t("desc.noclip_desc")
 })
 local menu_button6 = menu2:AddButton({
@@ -68,25 +70,25 @@ local menu_button6 = menu2:AddButton({
 local menu_button7 = menu2:AddCheckbox({
     icon = '👻',
     label = Lang:t("menu.invisible"),
-    value = menu2,
+    value = nil,
     description = Lang:t("desc.invisible_desc")
 })
 local menu_button8 = menu2:AddCheckbox({
     icon = '⚡',
     label = Lang:t("menu.god"),
-    value = menu2,
+    value = nil,
     description = Lang:t("desc.god_desc")
 })
 local names_button = menu2:AddCheckbox({
     icon = '📋',
     label = Lang:t("menu.names"),
-    value = menu2,
+    value = nil,
     description = Lang:t("desc.names_desc")
 })
 local blips_button = menu2:AddCheckbox({
     icon = '📍',
     label = Lang:t("menu.blips"),
-    value = menu2,
+    value = nil,
     description = Lang:t("desc.blips_desc")
 })
 local menu_button11 = menu5:AddButton({
@@ -320,12 +322,6 @@ local coords4_button = menu11:AddButton({
     value = 'coords',
     description = Lang:t("desc.vector4_desc")
 })
-local togglecoords_button = menu11:AddCheckbox({
-    icon = '📍',
-    label = Lang:t("menu.display_coords"),
-    value = nil,
-    description = Lang:t("desc.display_coords_desc")
-})
 
 local heading_button = menu11:AddButton({
     icon = '📋',
@@ -334,7 +330,14 @@ local heading_button = menu11:AddButton({
     description = Lang:t("desc.copy_heading_desc")
 })
 
-local vehicledev_button = menu11:AddButton({
+local togglecoords_button = menu11:AddCheckbox({
+    icon = '📍',
+    label = Lang:t("menu.display_coords"),
+    value = nil,
+    description = Lang:t("desc.display_coords_desc")
+})
+
+local vehicledev_button = menu11:AddCheckbox({
     icon = '🚘',
     label = Lang:t("menu.vehicle_dev_mode"),
     value = nil,
@@ -344,21 +347,22 @@ local vehicledev_button = menu11:AddButton({
 local menu_dev_button = menu11:AddCheckbox({
     icon = '⚫',
     label = Lang:t("menu.hud_dev_mode"),
-    value = menu11,
+    value = nil,
     description = Lang:t("desc.hud_dev_mode_desc")
 })
 
-local deletelazer_button = menu11:AddCheckbox({
-    icon = '🔫',
-    label = Lang:t("menu.delete_laser"),
-    value = menu11,
-    description = Lang:t("desc.delete_laser_desc")
-})
 local noclip_button = menu11:AddCheckbox({
     icon = '🎥',
     label = Lang:t("menu.noclip"),
-    value = menu11,
+    value = nil,
     description = Lang:t("desc.noclip_desc")
+})
+
+local entity_view_button = menu11:AddButton({
+    icon = '🔍',
+    label = Lang:t("menu.entity_view_options"),
+    value = menu15,
+    description = Lang:t("desc.entity_view_desc")
 })
 
 local menu12_button1 = menu12:AddButton({
@@ -367,23 +371,110 @@ local menu12_button1 = menu12:AddButton({
     value = menu13,
     description = Lang:t("desc.spawn_vehicle_desc")
 })
+
 local menu12_button2 = menu12:AddButton({
     icon = '🔧',
     label = Lang:t("menu.fix_vehicle"),
     value = 'fix',
     description = Lang:t("desc.fix_vehicle_desc")
 })
+
 local menu12_button3 = menu12:AddButton({
     icon = '💲',
     label = Lang:t("menu.buy"),
     value = 'buy',
     description = Lang:t("desc.buy_desc")
 })
+
 local menu12_button4 = menu12:AddButton({
     icon = '☠',
     label = Lang:t("menu.remove_vehicle"),
     value = 'remove',
     description = Lang:t("desc.remove_vehicle_desc")
+})
+
+
+-- Entity View Buttons
+local entity_view_distance = menu15:AddSlider({
+    icon = '📏',
+    label = Lang:t("menu.entity_view_distance"),
+    value = GetCurrentEntityViewDistance(),
+    values = {{
+        label = '5',
+        value = '5',
+        description = Lang:t("menu.entity_view_distance")
+    }, {
+        label = '10',
+        value = '10',
+        description = Lang:t("menu.entity_view_distance")
+    }, {
+        label = '15',
+        value = '15',
+        description = Lang:t("menu.entity_view_distance")
+    }, {
+        label = '20',
+        value = '20',
+        description = Lang:t("menu.entity_view_distance")
+    }, {
+        label = '25',
+        value = '25',
+        description = Lang:t("menu.entity_view_distance")
+    }, {
+        label = '30',
+        value = '30',
+        description = Lang:t("menu.entity_view_distance")
+    }, {
+        label = '35',
+        value = '35',
+        description = Lang:t("menu.entity_view_distance")
+    }, {
+        label = '40',
+        value = '40',
+        description = Lang:t("menu.entity_view_distance")
+    }, {
+        label = '45',
+        value = '45',
+        description = Lang:t("menu.entity_view_distance")
+    }, {
+        label = '50',
+        value = '50',
+        description = Lang:t("menu.entity_view_distance")
+    }}
+})
+
+local copy_free_aim_entity_info = menu15:AddButton({
+    icon = '📋',
+    label = Lang:t("menu.entity_view_freeaim_copy"),
+    value = 'freeaimEntity',
+    description = Lang:t("desc.entity_view_freeaim_copy_desc")
+})
+
+local entity_view_freeaim = menu15:AddCheckbox({
+    icon = '🔫',
+    label = Lang:t("menu.entity_view_freeaim"),
+    value = nil,
+    description = Lang:t("desc.entity_view_freeaim_desc")
+})
+
+local entity_view_vehicle = menu15:AddCheckbox({
+    icon = '🚗',
+    label = Lang:t("menu.entity_view_vehicles"),
+    value = nil,
+    description = Lang:t("desc.entity_view_vehicles_desc")
+})
+
+local entity_view_ped = menu15:AddCheckbox({
+    icon = '🧍‍♂‍',
+    label = Lang:t("menu.entity_view_peds"),
+    value = nil,
+    description = Lang:t("desc.entity_view_peds_desc")
+})
+
+local entity_view_object = menu15:AddCheckbox({
+    icon = '📦',
+    label = Lang:t("menu.entity_view_objects"),
+    value = nil,
+    description = Lang:t("desc.entity_view_objects_desc")
 })
 
 local dev = false
@@ -403,9 +494,8 @@ menu_dev_button:On('change', function(item, newValue, oldValue)
     end
 end)
 
-local deleteLazer = false
-deletelazer_button:On('change', function(item, newValue, oldValue)
-    deleteLazer = not deleteLazer
+entity_view_freeaim:On('change', function(item, newValue, oldValue)
+    ToggleEntityFreeView()
 end)
 
 local function round(input, decimalPlaces)
@@ -441,6 +531,29 @@ local function CopyToClipboard(dataType)
             string = h
         })
         QBCore.Functions.Notify(Lang:t("success.heading_copied"), "success")
+    elseif dataType == 'freeaimEntity' then
+        local entity = GetFreeAimEntity()
+
+        if entity then
+            local entityHash = GetEntityModel(entity)
+            local entityName = Entities[entityHash] or "Unknown"
+            local entityCoords = GetEntityCoords(entity)
+            local entityHeading = GetEntityHeading(entity)
+            local entityRotation = GetEntityRotation(entity)
+            local x = round(entityCoords.x, 2)
+            local y = round(entityCoords.y, 2)
+            local z = round(entityCoords.z, 2)
+            local rotX = round(entityRotation.x, 2)
+            local rotY = round(entityRotation.y, 2)
+            local rotZ = round(entityRotation.z, 2)
+            local h = round(entityHeading, 2)
+            SendNUIMessage({
+                string = string.format('Model Name:\t%s\nModel Hash:\t%s\n\nHeading:\t%s\nCoords:\t\tvector3(%s, %s, %s)\nRotation:\tvector3(%s, %s, %s)', entityName, entityHash, h, x, y, z, rotX, rotY, rotZ)
+            })
+            QBCore.Functions.Notify(Lang:t("success.entity_copy"), "success")
+        else
+            QBCore.Functions.Notify(Lang:t("error.failed_entity_copy"), "error")
+        end
     end
 end
 
@@ -516,7 +629,11 @@ heading_button:On("select", function()
     CopyToClipboard('heading')
 end)
 
-vehicledev_button:On('select', function()
+copy_free_aim_entity_info:On("select", function()
+    CopyToClipboard('freeaimEntity')
+end)
+
+vehicledev_button:On('change', function()
     ToggleVehicleDeveloperMode()
 end)
 
@@ -526,6 +643,23 @@ end)
 
 togglecoords_button:On('change', function()
     ToggleShowCoordinates()
+end)
+
+entity_view_distance:On("select", function(item, value)
+    SetEntityViewDistance(value)
+    QBCore.Functions.Notify(Lang:t("info.entity_view_distance", {distance = value}))
+end)
+
+entity_view_vehicle:On('change', function()
+    ToggleEntityVehicleView()
+end)
+
+entity_view_object:On('change', function()
+    ToggleEntityObjectView()
+end)
+
+entity_view_ped:On('change', function()
+    ToggleEntityPedView()
 end)
 
 local vehicles = {}
