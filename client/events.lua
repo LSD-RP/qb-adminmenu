@@ -23,7 +23,7 @@ RegisterNetEvent('qb-admin:client:inventory', function(targetPed)
     TriggerServerEvent("inventory:server:OpenInventory", "otherplayer", targetPed)
 end)
 
-RegisterNetEvent('qb-admin:client:spectate', function(targetPed)
+RegisterNetEvent('qb-admin:client:spectate', function(targetPed, coords)
     local myPed = PlayerPedId()
     local targetplayer = GetPlayerFromServerId(targetPed)
     local target = GetPlayerPed(targetplayer)
@@ -34,6 +34,7 @@ RegisterNetEvent('qb-admin:client:spectate', function(targetPed)
         SetEntityInvincible(myPed, true) -- Set invincible
         NetworkSetEntityInvisibleToNetwork(myPed, true) -- Set invisibility
         lastSpectateCoord = GetEntityCoords(myPed) -- save my last coords
+        SetEntityCoords(myPed, coords) -- Teleport To Player
         NetworkSetInSpectatorMode(true, target) -- Enter Spectate Mode
     else
         isSpectating = false
