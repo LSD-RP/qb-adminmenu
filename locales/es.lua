@@ -5,7 +5,7 @@ local Translations = {
         ["changed_perm_failed"] = "Elige un grupo!",
         ["missing_reason"] = "¡Debes proporcionar una razón!",
         ["invalid_reason_length_ban"] = "¡Debes dar una razón y establecer una duración para el Ban!",
-        ["no_store_vehicle_garage"] = "No puede guardar este vehículo en su garaje..", 
+        ["no_store_vehicle_garage"] = "No puede guardar este vehículo en su garaje..",
         ["no_vehicle"] = "No estás en un vehículo..",
         ["no_weapon"] = "No tienes un arma en tus manos..",
         ["no_free_seats"] = "The vehicle has no free seats!",
@@ -26,6 +26,10 @@ local Translations = {
         ["success_vehicle_owner"] = "¡El vehículo ahora es tuyo!",
         ["receive_reports"] = "Estás recibiendo reports",
         ["entity_copy"] = "¡Información de la entidad Freeaim copiada al portapapeles!",
+        ["sucess.entered_vehicle"] = "Has entrado al vehículo correctamente",
+        ["spawn_weapon"] = "Has generado un arma ",
+        ["noclip_enabled"] = "No-clip activado",
+        ["noclip_disabled"] = "No-clip desactivado",
     },
     info = {
         ["ped_coords"] = "Coordenadas de Ped:",
@@ -150,6 +154,8 @@ local Translations = {
         ["entity_view_vehicles"] = "Mostrar vehículos",
         ["entity_view_objects"] = "Mostrar objetos",
         ["entity_view_freeaim_copy"] = "Copiar información de la entidad Freeaim",
+        ["spawn_weapons"] = "Generar arma",
+        ["max_mods"] = "Máximas modificaciones de vehículo",
     },
     desc = {
         ["admin_options_desc"] = "Varias opciones de administración",
@@ -191,6 +197,8 @@ local Translations = {
         ["entity_view_vehicles_desc"] = "Habilitar/Deshabilitar información de vehículos en el mundo",
         ["entity_view_objects_desc"] = "Habilitar/Deshabilitar la información del objeto en el mundo",
         ["entity_view_freeaim_copy_desc"] = "Copia la información de la entidad Free Aim al portapapeles",
+        ["spawn_weapons_desc"] = "Genera cualquier arma.",
+        ["max_mod_desc"] = "Modificaciones del vehículo actual al máximo",
     },
     time = {
         ["ban_length"] = "Duración del Ban",
@@ -263,7 +271,10 @@ local Translations = {
     }
 }
 
-Lang = Locale:new({
-    phrases = Translations,
-    warnOnMissing = true
-})
+if GetConvar('qb_locale', 'en') == 'es' then
+    Lang = Locale:new({
+        phrases = Translations,
+        warnOnMissing = true,
+        fallbackLang = Lang,
+    })
+end

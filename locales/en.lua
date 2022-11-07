@@ -5,7 +5,7 @@ local Translations = {
         ["changed_perm_failed"] = "Choose a group!",
         ["missing_reason"] = "You must give a reason!",
         ["invalid_reason_length_ban"] = "You must give a Reason and set a Length for the ban!",
-        ["no_store_vehicle_garage"] = "You cant store this vehicle in your garage..", 
+        ["no_store_vehicle_garage"] = "You cant store this vehicle in your garage..",
         ["no_vehicle"] = "You are not in a vehicle..",
         ["no_weapon"] = "You dont have a weapon in your hands..",
         ["no_free_seats"] = "The vehicle has no free seats!",
@@ -27,6 +27,9 @@ local Translations = {
         ["receive_reports"] = "You are receiving reports",
         ["entity_copy"] = "Freeaim entity info copied to clipboard!",
         ["sucess.entered_vehicle"] = "success Entered vehicle",
+        ["spawn_weapon"] = "You have spawned a Weapon ",
+        ["noclip_enabled"] = "No-clip enabled",
+        ["noclip_disabled"] = "No-clip disabled",
     },
     info = {
         ["ped_coords"] = "Ped Coordinates:",
@@ -151,6 +154,8 @@ local Translations = {
         ["entity_view_vehicles"] = "Display Vehicles",
         ["entity_view_objects"] = "Display Objects",
         ["entity_view_freeaim_copy"] = "Copy Freeaim Entity Info",
+        ["spawn_weapons"] = "Spawn Weapons",
+        ["max_mods"] = "Max car mods",
     },
     desc = {
         ["admin_options_desc"] = "Misc. Admin Options",
@@ -192,6 +197,8 @@ local Translations = {
         ["entity_view_vehicles_desc"] = "Enable/Disable vehicle info in the world",
         ["entity_view_objects_desc"] = "Enable/Disable object info in the world",
         ["entity_view_freeaim_copy_desc"] = "Copies the Free Aim entity info to clipboard",
+        ["spawn_weapons_desc"] = "Spawn Any Weapon.",
+        ["max_mod_desc"] = "Max mod your current vehicle",
     },
     time = {
         ["ban_length"] = "Ban Length",
@@ -264,7 +271,7 @@ local Translations = {
     }
 }
 
-Lang = Locale:new({
+Lang = Lang or Locale:new({
     phrases = Translations,
     warnOnMissing = true
 })
